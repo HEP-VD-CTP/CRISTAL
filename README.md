@@ -1,5 +1,5 @@
 # CRISTAL  
-### **C**ontrôle et **R**éconciliation des **I**nformations **S**canneées et **T**raitement des **A**nnotations **L**OM  
+### **C**ontrôle et **R**éconciliation des **I**nformations **S**cannées et **T**raitement des **A**nnotations **L**om 
 Parser & Réconciliateur des lectures optiques Axiome AXM980
 
 ---
