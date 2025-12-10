@@ -22,6 +22,8 @@ export const CristalStore = defineStore('cristal', () => {
 
   const page: Ref<"rec" | null> = ref("rec")
 
+  const nbAnswers: Ref<number> = ref(30)
+
   const recStep: Ref<"home" | "analyze" | "export"> = ref("home")
 
   const recType: Ref<"QCM102"|"QCMDC30"> = ref("QCM102")
@@ -30,15 +32,22 @@ export const CristalStore = defineStore('cristal', () => {
 
   const QCM102A: Ref<QCM102 | null> = ref(null)
   const QCM102V: Ref<QCM102 | null> = ref(null)
+  const QCM102Final: Ref<QCM102 | null> = ref(null)
+  const selectedQCM102: Ref<QCM102Scan | null> = ref(null)
   
+  const recNext: Ref<boolean> = ref(false)
 
   return {
     page,
+    nbAnswers,
     recStep,
     recType,
     recAFile,
     recVFile,
     QCM102A,
-    QCM102V
+    QCM102V,
+    QCM102Final,
+    selectedQCM102,
+    recNext
   }
 })

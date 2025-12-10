@@ -27,6 +27,9 @@ export function parseQCM102(content: string): QCM102 {
   }
 
   for (const line of lines) {
+    if (!line.trim()) 
+      continue; // Skip empty lines
+
     const parts = line.split(' ') 
 
     const id = parts[2] ?? ''

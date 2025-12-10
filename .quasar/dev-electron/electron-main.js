@@ -1,4 +1,4 @@
-// ../src-electron/electron-main.ts
+// src-electron/electron-main.ts
 import { app, BrowserWindow } from "electron";
 import path from "path";
 import os from "os";
