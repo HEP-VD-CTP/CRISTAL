@@ -65,11 +65,16 @@
       </div>
 
       <div>
-        <table style="width:100px">
+        <table style="width:500px">
           <tbody>
             
             <tr>
-              <td style="border:0" rowspan="2">Matricule <b>{{ store.selectedQCM102?.id }}</b></td>
+              <td style="border:0" rowspan="2">Matricule: </td>
+              <td style="border:0" rowspan="2">
+                <q-input
+                  v-model.number="store.selectedQCM102.id"
+                />
+              </td>
               <td style="border:0" rowspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Forme:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
               <td class="inttertd" style="color:red" v-for="j in letters">{{ j }}</td>
             </tr>
@@ -126,6 +131,7 @@ import QCM102Cell from 'src/components/QCM102Cell.vue'
 
 const letters = ref(["A", "B", "C", "D"])
 const numbers = ref(["1", "2", "3", "4"])
+const strNumbers = ref(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"])
 const maxInput = ref(102)
 
 const store = CristalStore()
@@ -171,8 +177,13 @@ async function next(){
         answers: []
       }
 
-      if (scan.form == '.')
+      // check the form
+      if (scan.form == '.') 
         scan.form = ''
+
+      // check the user id
+      if (scansA[i]?.id != scansV[i]?.id)
+        scan.id = '......' // mark as error
 
       for (let j = 0; j < (scansA[i]?.answers.length || 0); j++){
         if (scansA[i]?.answers[j] === scansV[i]?.answers[j])
@@ -234,13 +245,26 @@ function checkQCM102Data(): boolean {
   if (!store.QCM102Final)
     return false
 
+  // check each scan for errors
   for (const scan of store.QCM102Final.scans) {
+    // check for empty answers "."
     if (scan.answers.slice(0, store.nbAnswers).includes('.')) 
       return false
     
+    // check for valid form
     if (!numbers.value.includes(scan.form))
       return false
-    
+
+    // check for valid id
+    if (scan.id.length != 6 || strNumbers.value.includes(scan.id) == false) {
+      q.dialog({
+        title: 'Erreur',
+        message: `Erreur de matricule pour la feuille ${scan.sheet}. Veuillez corriger avant d'exporter.`,
+        ok: true
+      })  
+      return false
+    }
+
   }
 
   return true
