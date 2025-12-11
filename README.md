@@ -20,6 +20,14 @@ Ce parser automatise l’intégralité du pipeline décrit dans le protocole off
 
 CRISTAL vise à **sécuriser la correction**, automatiser les contrôles, réduire les erreurs humaines et fluidifier le flux opératoire de correction des QCM.
 
+
+---
+
+## ➡️ Processus de correction
+![alt text](documentation/processus.png "Title")
+
+
+
 ---
 
 ## 📄 Types de formulaires gérés
